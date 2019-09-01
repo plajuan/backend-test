@@ -7,8 +7,10 @@ public class ContaCorrente {
 	private List<Entry> entries = new ArrayList<Entry>();
 	
 	public void addEntry(Entry entry) {
-		entries.add(entry);
+		entries.add(entry);		
 	}
 	
-	
+	public void addAllEntries(List<Entry> entries) {
+		this.entries.addAll(entries);
+	}
 }
