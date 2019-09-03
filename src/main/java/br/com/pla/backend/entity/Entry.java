@@ -18,18 +18,32 @@ public class Entry {
 	private Double valor;
 	private String categoria;
 	private DecimalFormat real = (DecimalFormat) DecimalFormat.getInstance(new Locale("pt", "BR"));
-	private DateTimeFormatter dateFormat = new DateTimeFormatterBuilder().parseCaseSensitive()
+	private DateTimeFormatter dateFormatEn = new DateTimeFormatterBuilder()
+			.parseCaseSensitive()
+			.parseLenient()
 			.appendPattern("d-MMM-yyyy").toFormatter(Locale.ENGLISH);
+	private DateTimeFormatter dateFormatPtBR = new DateTimeFormatterBuilder()
+			.parseCaseSensitive()
+			.parseLenient()
+			.appendPattern("d-MMM-yyyy").toFormatter(new Locale("pt", "BR"));
 
-	public Entry(LocalDate data, String descricao, Double valor, String categoria) {
-		this.data = data;
+	public Entry(String data, String descricao, String valor, String categoria) {
+		data = data.replaceAll(" ", "");
+		data = data.replaceAll("/", "-");
+		data += "-2019";
+		this.data = LocalDate.parse(data, dateFormatPtBR);
 		this.descricao = descricao;
-		this.valor = valor;
-		this.categoria = categoria;
+		try {
+			this.valor = real.parse(valor.replaceAll(" ", "")).doubleValue();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.categoria = categoria == null ? "" : categoria;
 	}
 
 	public Entry(String[] line) {
-		this.data = LocalDate.parse(line[DATA_POS] + "-2019", dateFormat);
+		this.data = LocalDate.parse(line[DATA_POS] + "-2019", dateFormatEn);
 		this.descricao = line[DESCRICAO_POS];
 		this.valor = 0.0;
 		try {

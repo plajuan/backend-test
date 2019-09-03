@@ -13,10 +13,10 @@
 	</properties>
 	<build>
 		<plugins>
-		<plugin>
-            <artifactId>maven-surefire-plugin</artifactId>
-            <version>2.22.0</version>
-         </plugin>
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.22.0</version>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
@@ -55,5 +55,10 @@
 			<scope>test</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20190722</version>
+		</dependency>
 	</dependencies>
 </project>

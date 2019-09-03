@@ -16,16 +16,11 @@ public class ReadLocalFile implements IRead{
 	public List<Entry> getEntries(String path) {
 		List<Entry> lista = new ArrayList<Entry>();
 		try (Stream<String> stream = Files.lines(Paths.get(path))) {
-			lista = stream.filter(line -> !line.startsWith("D")).map(line -> line.split("\\t")).map(line -> new Entry(line)).collect(Collectors.toList());
+			lista = stream.skip(1).map( line ->  new Entry(line.split("\\t")) ).collect(Collectors.toList());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		return lista;
 	}
 	
-	private Entry getEntry(String line) {
-		
-		return null;
-	}
-
 }

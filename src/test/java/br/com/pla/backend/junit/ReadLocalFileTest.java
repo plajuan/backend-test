@@ -21,7 +21,7 @@ class ReadLocalFileTest {
 	void test() {
 		IRead readLogFile = new ReadLocalFile();
 		List<Entry> lines = readLogFile.getEntries("/home/juanpla/workspace/backend-test/db.log");
-		assertEquals(20, lines.size());
+		assertEquals(30, lines.size());
 	}
 
 }
